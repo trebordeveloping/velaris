@@ -10,4 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(include)
 
 # Create executable
-add_executable(velaris src/main.cpp)
+add_executable(velaris
+    src/main.cpp
+    src/aircraft.cpp
+    src/simulation.cpp
+)
