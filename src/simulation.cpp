@@ -27,10 +27,11 @@ namespace velaris
 
         for (int i = 1; i <= total_steps_; ++i) {
 
-            // Calculate change in state
-
+            // Calculate the forces
+            aircraft.forces();
 
             // Update state
+            aircraft.update(dt_);
 
 
             // Update time

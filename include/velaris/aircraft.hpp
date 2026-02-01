@@ -17,6 +17,11 @@ namespace velaris
         double p, q, r;
     };
 
+    struct Forces
+    {
+        double x, y, z;
+    };
+
     class Aircraft
     {
 
@@ -24,12 +29,14 @@ namespace velaris
         Aircraft(double mass);
 
         State get_state();
-        void update_state(const State& new_state);
+        void forces();
+        void update(double dt);
         void print_status() const;
 
     private:
         double mass_;
         State state_{}; // initialise all to 0.0
+        Forces forces_{};
     };
 
 }

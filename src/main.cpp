@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
 
 
     velaris::Aircraft aircraft(1000.0);
-    velaris::Simulation sim(0.01, 10.0);
+    velaris::Simulation sim(0.01, 100.0);
 
     // Execute
     sim.run(aircraft);
