@@ -9,9 +9,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Header files
 include_directories(include)
 
+# Add submodule directory
+add_subdirectory(libs/eigen)
+
 # Create executable
 add_executable(velaris
     src/main.cpp
     src/aircraft.cpp
     src/simulation.cpp
 )
+
+target_link_libraries(velaris PRIVATE Eigen3::Eigen)
