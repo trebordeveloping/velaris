@@ -20,43 +20,32 @@ namespace velaris
         const double thrust = 5;
         const double drag = 5;
 
-        forces_.x = thrust - drag;
-        forces_.y = 0;
-        forces_.z = lift - weight;
+        forces_ = Eigen::Vector3d(
+            thrust - drag,
+            0.0,
+            lift - weight
+        );
     }
     
     void Aircraft::update(double dt)
     {
 
         // accelerations
-        const double a_x = forces_.x / mass_;
-        const double a_y = forces_.y / mass_;
-        const double a_z = forces_.z / mass_;
+        Eigen::Vector3d acc = forces_ / mass_;
+        
 
         // integration
-        const double du = a_x * dt;
-        const double dv = a_y * dt;
-        const double dw = a_z * dt;
-
-        const double dx = (state_.u * dt) + (0.5 * a_x * dt*dt);
-        const double dy = (state_.v * dt) + (0.5 * a_y * dt*dt);
-        const double dz = (state_.w * dt) + (0.5 * a_z * dt*dt);
-
-        state_.x += dx;
-        state_.y += dy;
-        state_.z += dz;
-        state_.u += du;
-        state_.v += dv;
-        state_.w += dw;
+        state_.pos += (state_.vel * dt) + (0.5 * acc * dt*dt);
+        state_.vel += (acc * dt);
 
         // hardcode 3DOF
-        state_.y = 0;
-        state_.v = 0;
+        state_.pos.y() = 0;
+        state_.vel.y() = 0;
 
     }
 
     void Aircraft::print_status() const
     {
-        std::cout << "Pos: (" << state_.x << ", " << state_.y << ", " << state_.z << ")" << std::endl;
+        std::cout << "Pos: (" << state_.pos.x() << ", " << state_.pos.y() << ", " << state_.pos.z() << ")" << std::endl;
     }
 }

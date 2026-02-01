@@ -80,10 +80,10 @@ namespace velaris
         for (size_t i = 0; i < history_.size(); ++i) {
             const auto& s = history_[i];
             file    << i * dt_ << ","
-                    << s.x << "," << s.y << "," << s.z << ","
-                    << s.phi << "," << s.theta << "," << s.psi << ","
-                    << s.u << "," << s.v << "," << s.w << ","
-                    << s.p << "," << s.q << "," << s.r << "\n";
+                    << s.pos.x() << "," << s.pos.y() << "," << s.pos.z() << ","
+                    << s.att.x() << "," << s.att.y() << "," << s.att.z() << ","
+                    << s.vel.x() << "," << s.vel.y() << "," << s.vel.z() << ","
+                    << s.rot.x() << "," << s.rot.y() << "," << s.rot.z() << "\n";
         }
 
         file.close();

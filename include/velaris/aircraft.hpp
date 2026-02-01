@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <Eigen/Dense>
 
 namespace velaris
 {
@@ -8,18 +9,13 @@ namespace velaris
     struct State
     {
         // Position
-        double x, y, z;
+        Eigen::Vector3d pos = Eigen::Vector3d::Zero();  // x, y, z
         // Attitude
-        double phi, theta, psi;
+        Eigen::Vector3d att = Eigen::Vector3d::Zero();  // bank, pitch, azimuth
         // Translation
-        double u, v, w;
+        Eigen::Vector3d vel = Eigen::Vector3d::Zero();  // u, v, w
         // Rotation
-        double p, q, r;
-    };
-
-    struct Forces
-    {
-        double x, y, z;
+        Eigen::Vector3d rot = Eigen::Vector3d::Zero();  // p, q, r
     };
 
     class Aircraft
@@ -36,7 +32,7 @@ namespace velaris
     private:
         double mass_;
         State state_{}; // initialise all to 0.0
-        Forces forces_{};
+        Eigen::Vector3d forces_ = Eigen::Vector3d::Zero(); // Add this line
     };
 
 }
